@@ -942,7 +942,7 @@ window.addEventListener('wheel', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 8000);
+  }, 4000);
 }, { passive: true });
 
 window.addEventListener('touchmove', () => {
@@ -958,7 +958,7 @@ window.addEventListener('touchmove', () => {
 setTimeout(() => {
   autoScrollActive = true;
   autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-}, 3000);
+}, 8000);
 
 /* ADMIN LOGIN */
 function adminLogin(){
