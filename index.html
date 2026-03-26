@@ -92,7 +92,7 @@ nav a:hover, nav button:hover{
 }
 /* HERO */
 .hero{
-  height:100vh;
+  height:110vh;
   width:100%;
   background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
   url('main1.PNG') center/cover no-repeat;
@@ -425,7 +425,7 @@ footer{
     <button class="lang-btn" onclick="toggleLang()">EN / తెలుగు</button>
     <button class="dark-btn" onclick="toggleDark()">🌙 Dark Mode</button>
     <button id="audioBtn" onclick="toggleAudio()">🔊 Play Music</button>
-	 <button id="audioBtn1" onclick="toggleAudio()">🔊 Play History</button> 
+	 <button id="audioBtn" onclick="toggleAudio()">🔊 Play History</button> 
     <button id="muteBtn" onclick="toggleMute()">🔈 Mute</button>
     <button id="logoutBtn" onclick="logout()" style="display:none;">Logout</button>
   </nav>
@@ -435,7 +435,7 @@ footer{
   <source src="Ringtone1.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="templeAudio1" loop>
+<audio id="templeAudio" loop>
   <source src="History.mp3" type="audio/mpeg">
 </audio>	
 
@@ -879,7 +879,7 @@ function toggleMute(){
 
 
 
-/* AUDIO HISTORY*/
+/* AUDIO HISTORY
 const audio=document.getElementById("templeAudio1");
 const audioBtn=document.getElementById("audioBtn1");
 const muteBtn=document.getElementById("muteBtn");
@@ -894,7 +894,7 @@ function toggleAudio(){
 function toggleMute(){
   audio.muted=!audio.muted;
   muteBtn.innerText=audio.muted?"🔇 Muted":"🔈 Unmute";
-}	
+}	*/
 
 /* ADMIN LOGIN */
 function adminLogin(){
