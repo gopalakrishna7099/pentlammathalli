@@ -926,8 +926,7 @@ function toggleMute() {
 /* ── CONTINUOUS LOOPING AUTO-SCROLL (starts after 3s) ── */
 let autoScrollRAF = null;
 let autoScrollActive = false;
-const SCROLL_SPEED =0; // px per frame — increase for faster scroll
-
+const SCROLL_SPEED =0.2; // px per frame — increase for faster scroll
 function autoScrollLoop() {
   if (!autoScrollActive) return;
   const atBottom =
@@ -949,7 +948,7 @@ window.addEventListener('wheel', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 8000);
+  }, 2000);
 }, { passive: true });
 
 window.addEventListener('touchmove', () => {
@@ -958,14 +957,14 @@ window.addEventListener('touchmove', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 8000);
+  }, 2000);
 }, { passive: true });
 
 /* Kick off after 3 seconds */
 setTimeout(() => {
   autoScrollActive = true;
   autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-}, 8000);
+}, 2000);
 
 /* ADMIN LOGIN */
 function adminLogin(){
