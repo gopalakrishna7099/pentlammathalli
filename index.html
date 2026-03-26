@@ -745,9 +745,10 @@ function toggleNav(){
 
 /* POOJA */
 let poojas=JSON.parse(localStorage.getItem("poojas"))||[
-  "Suprabhatam – 5:30 AM",
-  "Kumkuma Archana – 9:00 AM",
-  "Archana – 8:00 AM"
+  "Deeparadhana – 6:00 AM",
+  "Alankarana – 8:00 AM",
+  "Achana – 9:00 AM",
+  "kumkuma Archana - on special days"
 ];
 
 function renderPoojas(){
@@ -919,7 +920,7 @@ function toggleMute() {
 /* ── CONTINUOUS LOOPING AUTO-SCROLL (starts after 3s) ── */
 let autoScrollRAF = null;
 let autoScrollActive = false;
-const SCROLL_SPEED = 0.3; // px per frame — increase for faster scroll
+const SCROLL_SPEED = 0.5; // px per frame — increase for faster scroll
 
 function autoScrollLoop() {
   if (!autoScrollActive) return;
@@ -942,7 +943,7 @@ window.addEventListener('wheel', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 8000);
+  }, 4000);
 }, { passive: true });
 
 window.addEventListener('touchmove', () => {
@@ -951,14 +952,14 @@ window.addEventListener('touchmove', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 8000);
+  }, 4000);
 }, { passive: true });
 
 /* Kick off after 3 seconds */
 setTimeout(() => {
   autoScrollActive = true;
   autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-}, 8000);
+}, 4000);
 
 /* ADMIN LOGIN */
 function adminLogin(){
