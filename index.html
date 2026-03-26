@@ -425,7 +425,7 @@ footer{
     <button class="lang-btn" onclick="toggleLang()">EN / తెలుగు</button>
     <button class="dark-btn" onclick="toggleDark()">🌙 Dark Mode</button>
     <button id="audioBtn" onclick="toggleAudio()">🔊 Play Music</button>
-	 <button id="audioBtn" onclick="toggleAudio()">🔊 Play History</button> 
+	 <button id="audioBtnHistory" onclick="toggleHistory()">📜 Play History</button> 
     <button id="muteBtn" onclick="toggleMute()">🔈 Mute</button>
     <button id="logoutBtn" onclick="logout()" style="display:none;">Logout</button>
   </nav>
@@ -435,7 +435,7 @@ footer{
   <source src="Ringtone2.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="templeAudio" loop>
+<audio id="historyAudio">
   <source src="history.mp3" type="audio/mpeg">
 </audio>	
 
@@ -879,22 +879,19 @@ function toggleMute(){
 
 
 
-/* AUDIO HISTORY
-const audio=document.getElementById("templeAudio1");
-const audioBtn=document.getElementById("audioBtn1");
-const muteBtn=document.getElementById("muteBtn");
-window.addEventListener('load',()=>{
-  audio.play().catch(()=>{});
-  audioBtn1.innerText="🔊 Pause Music";
-});
-function toggleAudio(){
-  if(audio.paused){audio.play(); audioBtn1.innerText="🔊 Pause Music";}
-  else{audio.pause(); audioBtn1.innerText="🔈 Play Music";}
+/* HISTORY AUDIO */
+const historyAudio = document.getElementById("historyAudio");
+const audioBtnHistory = document.getElementById("audioBtnHistory");
+function toggleHistory(){
+  if(historyAudio.paused){
+    historyAudio.play();
+    audioBtnHistory.innerText="⏸ Pause History";
+  } else {
+    historyAudio.pause();
+    historyAudio.currentTime = 0;
+    audioBtnHistory.innerText="📜 Play History";
+  }
 }
-function toggleMute(){
-  audio.muted=!audio.muted;
-  muteBtn.innerText=audio.muted?"🔇 Muted":"🔈 Unmute";
-}	*/
 
 /* ADMIN LOGIN */
 function adminLogin(){
