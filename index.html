@@ -942,7 +942,7 @@ window.addEventListener('wheel', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 4000);
+  }, 8000);
 }, { passive: true });
 
 window.addEventListener('touchmove', () => {
@@ -951,7 +951,7 @@ window.addEventListener('touchmove', () => {
   clearTimeout(userScrollTimer);
   userScrollTimer = setTimeout(() => {
     autoScrollRAF = requestAnimationFrame(autoScrollLoop);
-  }, 4000);
+  }, 8000);
 }, { passive: true });
 
 /* Kick off after 3 seconds */
