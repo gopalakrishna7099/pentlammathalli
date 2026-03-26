@@ -860,38 +860,105 @@ function toggleDark(){
   document.body.classList.toggle("dark");
 }
 
-/* AUDIO */
-const audio=document.getElementById("templeAudio");
-const audioBtn=document.getElementById("audioBtn");
-const muteBtn=document.getElementById("muteBtn");
-window.addEventListener('load',()=>{
-  audio.play().catch(()=>{});
-  audioBtn.innerText="🔊 Pause Music";
-});
-function toggleAudio(){
-  if(audio.paused){audio.play(); audioBtn.innerText="🔊 Pause Music";}
-  else{audio.pause(); audioBtn.innerText="🔈 Play Music";}
-}
-function toggleMute(){
-  audio.muted=!audio.muted;
-  muteBtn.innerText=audio.muted?"🔇 Muted":"🔈 Unmute";
-}
-
-
-
-/* HISTORY AUDIO */
-const historyAudio = document.getElementById("historyAudio");
+/* ── AUDIO ── */
+const audio           = document.getElementById("templeAudio");
+const historyAudio    = document.getElementById("historyAudio");
+const audioBtn        = document.getElementById("audioBtn");
 const audioBtnHistory = document.getElementById("audioBtnHistory");
-function toggleHistory(){
-  if(historyAudio.paused){
+const muteBtn         = document.getElementById("muteBtn");
+
+/* Auto-play music on load */
+window.addEventListener('load', () => {
+  audio.play().catch(() => {});
+  audioBtn.innerText = "🔊 Pause Music";
+});
+
+/* Play / Pause music — stops history if playing */
+function toggleAudio() {
+  if (audio.paused) {
+    if (!historyAudio.paused) {
+      historyAudio.pause();
+      historyAudio.currentTime = 0;
+      audioBtnHistory.innerText = "📜 Play History";
+    }
+    audio.play();
+    audioBtn.innerText = "🔊 Pause Music";
+  } else {
+    audio.pause();
+    audioBtn.innerText = "🔈 Play Music";
+  }
+}
+
+/* Play History — blocked while music is playing */
+function toggleHistory() {
+  if (!audio.paused) {
+    const prev = audioBtnHistory.innerText;
+    audioBtnHistory.innerText = "⛔ Stop Music First";
+    setTimeout(() => { audioBtnHistory.innerText = prev; }, 1800);
+    return;
+  }
+  if (historyAudio.paused) {
     historyAudio.play();
-    audioBtnHistory.innerText="⏸ Pause History";
+    audioBtnHistory.innerText = "⏸ Pause History";
   } else {
     historyAudio.pause();
     historyAudio.currentTime = 0;
-    audioBtnHistory.innerText="📜 Play History";
+    audioBtnHistory.innerText = "📜 Play History";
   }
 }
+
+/* Mute / Unmute BOTH audios together */
+let globalMuted = false;
+function toggleMute() {
+  globalMuted = !globalMuted;
+  audio.muted        = globalMuted;
+  historyAudio.muted = globalMuted;
+  muteBtn.innerText  = globalMuted ? "🔇 Unmute" : "🔈 Mute";
+}
+
+/* ── CONTINUOUS LOOPING AUTO-SCROLL (starts after 3s) ── */
+let autoScrollRAF = null;
+let autoScrollActive = false;
+const SCROLL_SPEED = 0.6; // px per frame — increase for faster scroll
+
+function autoScrollLoop() {
+  if (!autoScrollActive) return;
+  const atBottom =
+    window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+  if (atBottom) {
+    /* Instantly jump back to top, then continue */
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  } else {
+    window.scrollBy(0, SCROLL_SPEED);
+  }
+  autoScrollRAF = requestAnimationFrame(autoScrollLoop);
+}
+
+/* Pause auto-scroll when user manually scrolls, resume after 4s of inactivity */
+let userScrollTimer = null;
+window.addEventListener('wheel', () => {
+  if (!autoScrollActive) return;
+  cancelAnimationFrame(autoScrollRAF);
+  clearTimeout(userScrollTimer);
+  userScrollTimer = setTimeout(() => {
+    autoScrollRAF = requestAnimationFrame(autoScrollLoop);
+  }, 4000);
+}, { passive: true });
+
+window.addEventListener('touchmove', () => {
+  if (!autoScrollActive) return;
+  cancelAnimationFrame(autoScrollRAF);
+  clearTimeout(userScrollTimer);
+  userScrollTimer = setTimeout(() => {
+    autoScrollRAF = requestAnimationFrame(autoScrollLoop);
+  }, 4000);
+}, { passive: true });
+
+/* Kick off after 3 seconds */
+setTimeout(() => {
+  autoScrollActive = true;
+  autoScrollRAF = requestAnimationFrame(autoScrollLoop);
+}, 3000);
 
 /* ADMIN LOGIN */
 function adminLogin(){
