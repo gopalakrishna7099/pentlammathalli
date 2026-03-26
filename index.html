@@ -51,7 +51,7 @@ header{
 }
 header h3{
   margin:0;
-  font-size:22px;
+  font-size:18px;
   font-weight:700;
   display:flex;
   align-items:center;
@@ -92,7 +92,7 @@ nav a:hover, nav button:hover{
 }
 /* HERO */
 .hero{
-  height:110vh;
+  height:100vh;
   width:100%;
   background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
   url('main1.PNG') center/cover no-repeat;
@@ -425,6 +425,7 @@ footer{
     <button class="lang-btn" onclick="toggleLang()">EN / తెలుగు</button>
     <button class="dark-btn" onclick="toggleDark()">🌙 Dark Mode</button>
     <button id="audioBtn" onclick="toggleAudio()">🔊 Play Music</button>
+	 <button id="audioBtn1" onclick="toggleAudio()">🔊 Play History</button> 
     <button id="muteBtn" onclick="toggleMute()">🔈 Mute</button>
     <button id="logoutBtn" onclick="logout()" style="display:none;">Logout</button>
   </nav>
@@ -433,6 +434,10 @@ footer{
 <audio id="templeAudio" loop>
   <source src="Ringtone1.mp3" type="audio/mpeg">
 </audio>
+
+<audio id="templeAudio1" loop>
+  <source src="History.mp3" type="audio/mpeg">
+</audio>	
 
   <section class="hero">
   <h1 id="heroTitle"></h1>
@@ -871,6 +876,25 @@ function toggleMute(){
   audio.muted=!audio.muted;
   muteBtn.innerText=audio.muted?"🔇 Muted":"🔈 Unmute";
 }
+
+
+
+/* AUDIO HISTORY*/
+const audio=document.getElementById("templeAudio1");
+const audioBtn=document.getElementById("audioBtn1");
+const muteBtn=document.getElementById("muteBtn");
+window.addEventListener('load',()=>{
+  audio.play().catch(()=>{});
+  audioBtn1.innerText="🔊 Pause Music";
+});
+function toggleAudio(){
+  if(audio.paused){audio.play(); audioBtn1.innerText="🔊 Pause Music";}
+  else{audio.pause(); audioBtn1.innerText="🔈 Play Music";}
+}
+function toggleMute(){
+  audio.muted=!audio.muted;
+  muteBtn.innerText=audio.muted?"🔇 Muted":"🔈 Unmute";
+}	
 
 /* ADMIN LOGIN */
 function adminLogin(){
