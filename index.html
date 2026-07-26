@@ -430,19 +430,68 @@ footer{
   }
 }
 
-	.counter {
-            position: fixed;
-            top: 19px;
-            right: 740px;
-            background: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 8px;
-            font-weight: bold;
-			
-			}
+
+
+.visitor-counter{
+    position:fixed;
+    top:15px;
+    right:10px;
+    background:linear-gradient(135deg,#0d6efd,#0dcaf0);
+    color:#fff;
+    padding:12px 18px;
+    border-radius:30px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:bold;
+    font-size:16px;
+    z-index:9999;
+}
+
+.visitor-counter span{
+    background:#fff;
+    color:#0d6efd;
+    padding:3px 10px;
+    border-radius:15px;
+    min-width:40px;
+    text-align:center;
+}
+
+/* Tablet */
+@media (max-width:768px){
+    .visitor-counter{
+        top:10px;
+        right:10px;
+        padding:10px 15px;
+        font-size:14px;
+    }
+
+    .visitor-counter span{
+        min-width:35px;
+    }
+}
+
+/* Mobile */
+@media (max-width:480px){
+    .visitor-counter{
+        top:8px;
+        right:8px;
+        padding:8px 12px;
+        font-size:13px;
+        border-radius:20px;
+    }
+
+    .visitor-counter span{
+        padding:2px 8px;
+        min-width:30px;
+        font-size:13px;
+    }
+}
+
+
+
+	
 
 </style>
 </head>
