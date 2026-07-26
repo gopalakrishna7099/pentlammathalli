@@ -430,12 +430,29 @@ footer{
   }
 }
 
+	.counter {
+            position: fixed;
+            top: 19px;
+            right: 740px;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 8px;
+            font-weight: bold;
+			
+			}
+
 </style>
 </head>
 <body>
 
 <header>
   <h3><img src="LOGO.jpeg" alt="Temple Logo">Sri Sri Sri Pentlamma Ammavaru</h3>
+	<div class="counter">
+    Visitors: <span id="count">0</span>
+</div>
   <div class="menu-icon" onclick="toggleNav()">☰</div>
   
   <nav id="mainNav">
@@ -1732,6 +1749,18 @@ function startLiveSystem() {
 
   }, 5000);
 }
+
+	let count = localStorage.getItem("visitorCount");
+
+    if (!count) {
+        count = 0;
+    }
+
+    count = Number(count) + 1;
+
+    localStorage.setItem("visitorCount", count);
+
+    document.getElementById("count").textContent = count;
 
 </script>
 </body>
